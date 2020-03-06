@@ -168,7 +168,10 @@
       bottom: 0;
       width: 100vw;
       height: 5rem;
-      left: 5rem;
+    }
+
+    .code-container {
+      display: none;
     }
   
     .right-navbar {
@@ -211,7 +214,7 @@
     }
   
     .navbar:hover {
-      width: 10vw;
+      width: 16rem;
     }
   
     .navbar:hover .link-text {
