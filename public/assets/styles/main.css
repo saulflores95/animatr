@@ -33,22 +33,12 @@
     padding: 1rem;
 }
 
-  
   .navbar {
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 600ms ease;
   }
   
-  .right-navbar {
-    top: 0;
-    width: 5rem;
-    height: 100vh;
-    float:right;
-    background-color: red;
-    transition: width 600ms ease;
-}
-
   .navbar-nav {
     list-style: none;
     padding: 0;
@@ -124,8 +114,7 @@
     transition: var(--transition-speed);
   }
   
-  .logo-text
-  {
+  .logo-text {
     display: inline;
     position: absolute;
     left: -999px;
@@ -135,13 +124,51 @@
   .navbar:hover .logo svg {
     transform: rotate(-180deg);
   }
+
+  .right-bar {
+    background-color: red;
+    position: fixed;
+    transition: width 600ms ease;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+
+  .code-container {
+    background-color: blue;
+    height: 2vh;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    transition: height 600ms ease;
+
+    position: fixed;
+    bottom:0;
+    width: 80vw;
+    margin-left: 8vw;
+  }
   
+  .code-container:hover {
+    height: 30vh;
+  }
+
+  .code-container-col {
+    flex: 1;
+    padding: 1rem;
+    border-style: solid;
+    border-color: black;
+  }
+
   /* Small screens */
   @media only screen and (max-width: 600px) {
     .navbar {
       bottom: 0;
       width: 100vw;
       height: 5rem;
+      left: 5rem;
     }
   
     .right-navbar {
@@ -166,6 +193,17 @@
   
   /* Large screens */
   @media only screen and (min-width: 600px) {
+    .right-bar {
+      bottom: 0;
+      right: 0;
+      width: 5rem;
+      height: 100vh;
+    }
+
+    .right-bar:hover {
+      width: 10vw;
+    }
+
     .navbar {
       top: 0;
       width: 5rem;
@@ -173,17 +211,13 @@
     }
   
     .navbar:hover {
-      width: 16rem;
+      width: 10vw;
     }
   
     .navbar:hover .link-text {
       display: inline;
     }
     
-    .right-navbar:hover {
-        width: 16rem;
-    }
-
     .navbar:hover .logo svg
     {
       margin-left: 11rem;
