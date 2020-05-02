@@ -37,6 +37,7 @@
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 600ms ease;
+    z-index: 99;
   }
   
   .navbar-nav {
@@ -169,6 +170,7 @@
     width:100%; 
     border: solid;
     overflow: hidden;
+    position:relative;
   }
 
   /* Small screens */
@@ -284,7 +286,7 @@
     height: 55px;
     background: #6649b8;
     position: relative;
-    z-index: -1;
+
   }
   .octagon:before {
     content: "";
