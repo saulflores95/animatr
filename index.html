@@ -1,0 +1,313 @@
+
+  
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./public/assets/styles/main.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"rel="stylesheet"/>
+   <style type="text/css" media="screen">
+      .editor { 
+         width: 100%;
+         height: 100%;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="code-container" id="cc" onresize="resizeCodeEditor()">
+      <div class="code-container-col">
+            <div id="html-editor" class='editor'>
+html
+            </div>
+      </div>
+      <div class="code-container-col">
+         <div id="css-editor" class='editor'>
+css
+.{ border:none; }
+         </div>
+      </div>
+      <div class="code-container-col">
+         <div id="js-editor" class='editor'>
+js
+function foo(items) {
+   var x = "All this is syntax highlighted";
+   return x;
+}
+         </div>
+      </div>
+   </div>
+   <nav class="navbar">
+      <ul class="navbar-nav">
+         <li class="logo">
+            <a href="#" class="nav-link">
+               <span class="link-text logo-text">AnimatR</span>
+               <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fad"
+                  data-icon="angle-double-right"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  class="svg-inline--fa fa-angle-double-right fa-w-14 fa-5x"
+                  >
+                  <g class="fa-group">
+                     <path
+                        fill="currentColor"
+                        d="M224 273L88.37 409a23.78 23.78 0 0 1-33.8 0L32 386.36a23.94 23.94 0 0 1 0-33.89l96.13-96.37L32 159.73a23.94 23.94 0 0 1 0-33.89l22.44-22.79a23.78 23.78 0 0 1 33.8 0L223.88 239a23.94 23.94 0 0 1 .1 34z"
+                        class="fa-secondary"
+                        ></path>
+                     <path
+                        fill="currentColor"
+                        d="M415.89 273L280.34 409a23.77 23.77 0 0 1-33.79 0L224 386.26a23.94 23.94 0 0 1 0-33.89L320.11 256l-96-96.47a23.94 23.94 0 0 1 0-33.89l22.52-22.59a23.77 23.77 0 0 1 33.79 0L416 239a24 24 0 0 1-.11 34z"
+                        class="fa-primary"
+                        ></path>
+                  </g>
+               </svg>
+            </a>
+         </li>
+         <li class="nav-item"  onclick="MakeTriangle()">
+            <a id="TriangleItem" href="#" class="nav-link">
+               <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="triangle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-triangle fa-w-18 fa-7x"><path fill="currentColor" d="M329.6 24c-18.4-32-64.7-32-83.2 0L6.5 440c-18.4 31.9 4.6 72 41.6 72H528c36.9 0 60-40 41.6-72l-240-416zM48 464L288 48l240 416H48z" class=""></path></svg>
+               <span class="link-text">Triangle</span>
+            </a>
+         </li>
+         <li class="nav-item" onclick="MakeCircle()">
+            <a id="CircleItem" href="#" class="nav-link">
+               <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-circle fa-w-16 fa-7x"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" class=""></path></svg>                
+               <span class="link-text">Circle</span>
+            </a>
+         </li>
+         <li class="nav-item" onclick="MakeSquare()">
+            <a id="SquareItem" href="#" class="nav-link">
+               <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-square fa-w-14 fa-7x"><path fill="currentColor" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V86c0-3.3 2.7-6 6-6h340c3.3 0 6 2.7 6 6v340c0 3.3-2.7 6-6 6z" class=""></path></svg>                
+               <span class="link-text">Square</span>
+            </a>
+         </li>
+         <li class="nav-item" onclick="MakeOctagon()">
+            <a id="OctagonItem" href="#" class="nav-link">
+               <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="octagon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-octagon fa-w-16 fa-7x"><path fill="currentColor" d="M497.9 150.5L361.5 14.1c-9-9-21.2-14.1-33.9-14.1H184.5c-12.7 0-24.9 5.1-33.9 14.1L14.1 150.5c-9 9-14.1 21.2-14.1 33.9v143.1c0 12.7 5.1 24.9 14.1 33.9l136.5 136.5c9 9 21.2 14.1 33.9 14.1h143.1c12.7 0 24.9-5.1 33.9-14.1L498 361.4c9-9 14.1-21.2 14.1-33.9v-143c-.1-12.8-5.2-25-14.2-34zm-33.9 177L327.5 464h-143L48 327.5v-143L184.5 48h143.1L464 184.5v143z" class=""></path></svg>
+               <span class="link-text">Octagon</span>
+            </a>
+         </li>
+         <li class="nav-item" id="themeButton">
+            <a href="#" class="nav-link">
+               <svg
+                  class="theme-icon"
+                  id="lightIcon"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fad"
+                  data-icon="moon-stars"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  class="svg-inline--fa fa-moon-stars fa-w-16 fa-7x"
+                  >
+                  <g class="fa-group">
+                     <path
+                        fill="currentColor"
+                        d="M320 32L304 0l-16 32-32 16 32 16 16 32 16-32 32-16zm138.7 149.3L432 128l-26.7 53.3L352 208l53.3 26.7L432 288l26.7-53.3L512 208z"
+                        class="fa-secondary"
+                        ></path>
+                     <path
+                        fill="currentColor"
+                        d="M332.2 426.4c8.1-1.6 13.9 8 8.6 14.5a191.18 191.18 0 0 1-149 71.1C85.8 512 0 426 0 320c0-120 108.7-210.6 227-188.8 8.2 1.6 10.1 12.6 2.8 16.7a150.3 150.3 0 0 0-76.1 130.8c0 94 85.4 165.4 178.5 147.7z"
+                        class="fa-primary"
+                        ></path>
+                  </g>
+               </svg>
+               <svg
+                  class="theme-icon"
+                  id="solarIcon"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fad"
+                  data-icon="sun"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  class="svg-inline--fa fa-sun fa-w-16 fa-7x"
+                  >
+                  <g class="fa-group">
+                     <path
+                        fill="currentColor"
+                        d="M502.42 240.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.41-94.8a17.31 17.31 0 0 0-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4a17.31 17.31 0 0 0 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.41-33.5 47.3 94.7a17.31 17.31 0 0 0 31 0l47.31-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3a17.33 17.33 0 0 0 .2-31.1zm-155.9 106c-49.91 49.9-131.11 49.9-181 0a128.13 128.13 0 0 1 0-181c49.9-49.9 131.1-49.9 181 0a128.13 128.13 0 0 1 0 181z"
+                        class="fa-secondary"
+                        ></path>
+                     <path
+                        fill="currentColor"
+                        d="M352 256a96 96 0 1 1-96-96 96.15 96.15 0 0 1 96 96z"
+                        class="fa-primary"
+                        ></path>
+                  </g>
+               </svg>
+               <svg
+                  class="theme-icon"
+                  id="darkIcon"
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fad"
+                  data-icon="sunglasses"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 576 512"
+                  class="svg-inline--fa fa-sunglasses fa-w-18 fa-7x"
+                  >
+                  <g class="fa-group">
+                     <path
+                        fill="currentColor"
+                        d="M574.09 280.38L528.75 98.66a87.94 87.94 0 0 0-113.19-62.14l-15.25 5.08a16 16 0 0 0-10.12 20.25L395.25 77a16 16 0 0 0 20.22 10.13l13.19-4.39c10.87-3.63 23-3.57 33.15 1.73a39.59 39.59 0 0 1 20.38 25.81l38.47 153.83a276.7 276.7 0 0 0-81.22-12.47c-34.75 0-74 7-114.85 26.75h-73.18c-40.85-19.75-80.07-26.75-114.85-26.75a276.75 276.75 0 0 0-81.22 12.45l38.47-153.8a39.61 39.61 0 0 1 20.38-25.82c10.15-5.29 22.28-5.34 33.15-1.73l13.16 4.39A16 16 0 0 0 180.75 77l5.06-15.19a16 16 0 0 0-10.12-20.21l-15.25-5.08A87.95 87.95 0 0 0 47.25 98.65L1.91 280.38A75.35 75.35 0 0 0 0 295.86v70.25C0 429 51.59 480 115.19 480h37.12c60.28 0 110.38-45.94 114.88-105.37l2.93-38.63h35.76l2.93 38.63c4.5 59.43 54.6 105.37 114.88 105.37h37.12C524.41 480 576 429 576 366.13v-70.25a62.67 62.67 0 0 0-1.91-15.5zM203.38 369.8c-2 25.9-24.41 46.2-51.07 46.2h-37.12C87 416 64 393.63 64 366.11v-37.55a217.35 217.35 0 0 1 72.59-12.9 196.51 196.51 0 0 1 69.91 12.9zM512 366.13c0 27.5-23 49.87-51.19 49.87h-37.12c-26.69 0-49.1-20.3-51.07-46.2l-3.12-41.24a196.55 196.55 0 0 1 69.94-12.9A217.41 217.41 0 0 1 512 328.58z"
+                        class="fa-secondary"
+                        ></path>
+                     <path
+                        fill="currentColor"
+                        d="M64.19 367.9c0-.61-.19-1.18-.19-1.8 0 27.53 23 49.9 51.19 49.9h37.12c26.66 0 49.1-20.3 51.07-46.2l3.12-41.24c-14-5.29-28.31-8.38-42.78-10.42zm404-50l-95.83 47.91.3 4c2 25.9 24.38 46.2 51.07 46.2h37.12C489 416 512 393.63 512 366.13v-37.55a227.76 227.76 0 0 0-43.85-10.66z"
+                        class="fa-primary"
+                        ></path>
+                  </g>
+               </svg>
+               <span class="link-text">AnimatR</span>
+            </a>
+         </li>
+      </ul>
+   </nav>
+   <main>
+      <div class="drawing=board">
+         <h1>Animate anything in the drawing board</h1>
+         <!--<p>
+            Customate you figures using the right panel
+         </p>
+         <p>
+            Add or remove anything you want
+         </p>
+         <p>
+            Taxidermy thundercats whatever austin. VHS helvetica ethical, dreamcatcher
+            enamel pin YOLO shabby chic locavore man bun crucifix pabst chillwave
+            pop-up vegan. Air plant mlkshk ethical echo park tumeric, whatever
+            crucifix godard scenester locavore pork belly yuccie vape. +1 gochujang
+            put a bird on it, pork belly whatever selfies vaporware occupy banh mi
+            normcore VHS. Cornhole normcore hashtag tilde. Hell of yr try-hard DIY raw
+            denim banjo, enamel pin irony polaroid copper mug tofu. Dreamcatcher lomo
+            literally 90's before they sold out, 3 wolf moon banh mi seitan chambray
+            cliche offal tote bag occupy pug.
+         </p>
+         <p>
+            Post-ironic hot chicken salvia yr yuccie ugh cold-pressed keffiyeh franzen
+            viral taxidermy mustache slow-carb crucifix vape. Taiyaki yuccie hell of
+            tacos PBR&amp;B, kitsch meggings tbh truffaut kickstarter mixtape af kogi.
+            Fingerstache vegan tofu waistcoat gentrify cray. Drinking vinegar 3 wolf
+            moon health goth craft beer master cleanse. Letterpress health goth 8-bit
+            chillwave craft beer brooklyn. Chicharrones master cleanse 8-bit,
+            mumblecore copper mug messenger bag poutine lomo kale chips flannel. Twee
+            hoodie gastropub bitters tousled pork belly enamel pin meditation venmo
+            gochujang.
+         </p>-->
+      </div>
+      <div id="board" class="drawing-board"></div>
+   </main>
+   <nav class="navbar right-bar">
+      <ul class="navbar-nav">
+         <div class="title">Height</div>
+         <div>            
+            <input type="range" class="range" name="" value="0" min="0" max="100" on mousemove="rangeSlider(this.value)" onchange="rangeSlider(this.value)">  
+            <span id ="rangeSlider" class = "rangeSlider">0 </span><span class="percent">%</span>
+         </div>
+
+         <div class="title">Width</div>
+         <div>            
+            <input type="range" class="range" name="" value="0" min="0" max="100" on mousemove="rangeSlider(this.value)" onchange="rangeSlider2(this.value)">  
+            <span id="rangeSlider2" class="rangeSlider">0</span><span class="percent">%</span>
+         </div>
+
+         <div class="title">Border Style</div>
+         <div class="borderStyle">
+            <select id="borderStyle">
+               <option value="dotted">Dotted</option>
+               <option value="dashed">Dashed</option>
+               <option value="solid">Solid</option>
+               <option value="double">Double</option>
+               <option value="none" selected>None</option>
+            </select>
+         </div>
+
+
+         <div class="title">Background Color</div>
+         <div class="colorPicker">
+            <input type="text" class="hex" id="hex1">
+            <input type="color" class="color" id="color1">
+         </div>
+
+         <div class="title">Border Color</div>
+         <div class="colorPicker">
+            <input type="text" class="hex" id="hex1">
+            <input type="color" class="color" id="color1">
+         </div>
+
+         <div class="title">Position</div>
+         <div class="position">
+            <form>
+               <label for="xpos">x: </label>
+               <input type="number" id="xpos" name="xpos" class="pos">
+               <label for="ypos">&nbsp;&nbsp; y: </label>
+               <input type="number" id="ypos" name="ypos" class="pos">
+            </form>
+         </div>
+
+         <div class="title">Z-Index</div>
+         <div class="zIndex">
+            <input type="number" id="xpos" name="xpos" class="pos">
+         </div>
+
+      </ul>
+      <button onclick="exportBoardToJson()">Export</button>
+      <button onclick="loadBoard()">Load</button>
+      <button onclick="clearBoard()">Clear</button>
+   </nav>
+   <script type="module" src="./public/assets/scripts/utils.js"></script>
+   <script type="module" src="./public/assets/scripts/figures.js"></script>
+   <script type="module" src="./public/assets/scripts/exporter.js"></script>
+   <script src="./public/assets/scripts/script.js"></script>
+   <script src="./public/assets/libs/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.11.0/beautify.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.11.0/beautify-css.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.11.0/beautify-html.min.js"></script>
+   <script>      
+      var htmleditor = ace.edit("html-editor");
+      htmleditor.setTheme("ace/theme/monokai");
+      htmleditor.session.setMode("ace/mode/html");
+
+      var csseditor = ace.edit("css-editor");
+      csseditor.setTheme("ace/theme/monokai");
+      csseditor.session.setMode("ace/mode/css");
+
+      var jseditor = ace.edit("js-editor");
+      jseditor.setTheme("ace/theme/monokai");
+      jseditor.session.setMode("ace/mode/javascript");
+
+      let resizeCodeEditor = () => {
+         let htmleditor = ace.edit("html-editor");
+         let csseditor = ace.edit("css-editor");
+         let jseditor = ace.edit("js-editor");
+         csseditor.resize()
+         jseditor.resize()
+         htmleditor.resize()
+         let boardText = html_beautify(this.getBoardText())
+         htmleditor.setValue(boardText, -1)
+         localStorage.setItem('animatrSession', JSON.stringify( this.exportBoardToJson()));
+         //let css = css_beautify(this.getCSS())
+      }
+      var codeContainer = document.getElementById("cc");
+      codeContainer.onmouseover = resizeCodeEditor;
+      
+      if (window.Worker) {
+            var worker = new Worker('./public/assets/scripts/worker.js')
+            worker.postMessage('load');
+            worker.addEventListener('message', (event) => {
+              console.log("event: ", event.data);
+            })
+      } else {
+         console.log("Browser does not support webworker");
+      }
+   </script>
+ </body>
