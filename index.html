@@ -241,11 +241,19 @@ function foo(items) {
          let boardText = html_beautify(this.getBoardText())
          htmleditor.setValue(boardText, -1)
          localStorage.setItem('animatrSession', JSON.stringify( this.exportBoardToJson()));
-
          //let css = css_beautify(this.getCSS())
       }
       var codeContainer = document.getElementById("cc");
       codeContainer.onmouseover = resizeCodeEditor;
-
+      
+      if (window.Worker) {
+            var worker = new Worker('./public/assets/scripts/worker.js')
+            worker.postMessage('load');
+            worker.addEventListener('message', (event) => {
+              console.log("event: ", event.data);
+            })
+      } else {
+         console.log("Browser does not support webworker");
+      }
    </script>
  </body>
