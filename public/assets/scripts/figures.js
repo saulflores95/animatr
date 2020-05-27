@@ -47,14 +47,32 @@ board.ondrop = function(e) {
             break;
     }
 
+    function loadProperties() {
+        setFigure(this.id);
+        document.getElementById("zin").value = div.style.zIndex;
+        rangeSlider((this.style.height).replace("px",""));
+        rangeSlider2((this.style.width).replace("px",""));
+        console.log(this);
+    }
+
+    function loadPropertiesByDiv(div) {
+        setFigure(div.id);
+        rangeSlider((div.style.height).replace("px",""));
+        rangeSlider2((div.style.width).replace("px",""));
+        document.getElementById("zin").value = div.style.zIndex;
+    }
+
     function spawnDiv(type, num) {
+        div.addEventListener ("click", loadProperties, false);
         div.style.position = "absolute";
         div.style.top = (e.clientY - board.offsetTop - 25) + "px";
         div.style.left = (e.clientX - board.offsetLeft - 25) + "px";
+        div.style.zIndex = 0;
         div.id = type + num;
         i++;
         board.appendChild(div);
         dragElement(document.getElementById(div.id));
+        loadPropertiesByDiv(div);
     }
 
     function spawnTriangle(idnum) {
@@ -74,7 +92,6 @@ board.ondrop = function(e) {
         div.style.background= "red";
         div.style.borderRadius= "50%";
         div.style.align= "center";
-
         spawnDiv("circle_", idnum);
     }
 

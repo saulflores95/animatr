@@ -142,7 +142,29 @@
     align-items: center;
     height: 100%;
     color: var(--text-primary);
+    overflow: hidden;
   }
+  
+  .parameter {
+    display: none;
+  }
+
+  .right-bar:hover .parameter {
+      display: inline;
+  }
+  .right-bar:hover .title {
+    width: auto;
+    margin-right: 0;
+  }
+
+  .right-bar:hover .range {
+    width: 200px;
+    height: 2px;
+    background: #b6b6b6;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 2px;
+  } 
 
   .code-container {
     /*background-color: blue;*/
@@ -349,6 +371,8 @@
   .title {
     margin-top: 20px;
     margin-bottom: 5px;
+    width: 40%;
+    margin-right: 30%;
   }
 
   .percent {

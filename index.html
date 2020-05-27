@@ -209,43 +209,43 @@ function foo(items) {
    <nav class="navbar right-bar">
       <ul class="navbar-nav">
          <div class="title">Height</div>
-         <div>            
-            <input type="range" class="range" name="" value="0" min="0" max="100" on mousemove="rangeSlider(this.value)" onchange="rangeSlider(this.value)">  
-            <span id ="rangeSlider" class = "rangeSlider">0 </span><span class="percent">%</span>
+         <div class="parameter">            
+            <input id="rangeHeight" type="range" class="range" name="" value="0" min="0" max="500" onmousemove="rangeSlider(this.value)" onchange="rangeSlider(this.value)">  
+            <span id ="rangeSlider" class = "rangeSlider">0 </span><span class="percent">px</span>
          </div>
 
          <div class="title">Width</div>
-         <div>            
-            <input type="range" class="range" name="" value="0" min="0" max="100" on mousemove="rangeSlider(this.value)" onchange="rangeSlider2(this.value)">  
-            <span id="rangeSlider2" class="rangeSlider">0</span><span class="percent">%</span>
+         <div class="parameter">            
+            <input id="rangeWidth" type="range" class="range" name="" value="0" min="0" max="500" onmousemove="rangeSlider2(this.value)" onchange="rangeSlider2(this.value)">  
+            <span id="rangeSlider2" class="rangeSlider">0</span><span class="percent">px</span>
          </div>
 
          <div class="title">Border Style</div>
-         <div class="borderStyle">
-            <select id="borderStyle">
+         <div class="borderStyle parameter">
+            <select id="borderStyle" onchange="borderSelect()">
                <option value="dotted">Dotted</option>
                <option value="dashed">Dashed</option>
-               <option value="solid">Solid</option>
+               <option value="solid" selected>Solid</option>
                <option value="double">Double</option>
-               <option value="none" selected>None</option>
+               <option value="none" >None</option>
             </select>
          </div>
 
 
          <div class="title">Background Color</div>
-         <div class="colorPicker">
+         <div class="colorPicker parameter">
             <input type="text" class="hex" id="hex1">
             <input type="color" class="color" id="color1">
          </div>
 
          <div class="title">Border Color</div>
-         <div class="colorPicker">
-            <input type="text" class="hex" id="hex1">
-            <input type="color" class="color" id="color1">
+         <div class="colorPicker parameter">
+            <input type="text" class="hex" id="hex2">
+            <input type="color" class="color" id="color2">
          </div>
 
          <div class="title">Position</div>
-         <div class="position">
+         <div class="position parameter">
             <form>
                <label for="xpos">x: </label>
                <input type="number" id="xpos" name="xpos" class="pos">
@@ -255,8 +255,8 @@ function foo(items) {
          </div>
 
          <div class="title">Z-Index</div>
-         <div class="zIndex">
-            <input type="number" id="xpos" name="xpos" class="pos">
+         <div class="zIndex parameter">
+            <input type="number" id="zin" name="zin" class="pos" oninput="zindexChange()">
          </div>
 
       </ul>
@@ -294,13 +294,13 @@ function foo(items) {
          htmleditor.resize()
          let boardText = html_beautify(this.getBoardText())
          htmleditor.setValue(boardText, -1)
-         localStorage.setItem('animatrSession', JSON.stringify( this.exportBoardToJson()));
+         //localStorage.setItem('animatrSession', JSON.stringify( this.exportBoardToJson()));
          //let css = css_beautify(this.getCSS())
       }
       var codeContainer = document.getElementById("cc");
       codeContainer.onmouseover = resizeCodeEditor;
       
-      if (window.Worker) {
+     /* if (window.Worker) {
             var worker = new Worker('./public/assets/scripts/worker.js')
             worker.postMessage('load');
             worker.addEventListener('message', (event) => {
@@ -308,6 +308,6 @@ function foo(items) {
             })
       } else {
          console.log("Browser does not support webworker");
-      }
+      }*/
    </script>
  </body>
