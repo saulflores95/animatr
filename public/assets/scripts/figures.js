@@ -48,18 +48,7 @@ board.ondrop = function(e) {
     }
 
     function loadProperties() {
-        setFigure(this.id);
-        document.getElementById("zin").value = div.style.zIndex;
-        rangeSlider((this.style.height).replace("px",""));
-        rangeSlider2((this.style.width).replace("px",""));
-        console.log(this);
-    }
-
-    function loadPropertiesByDiv(div) {
-        setFigure(div.id);
-        rangeSlider((div.style.height).replace("px",""));
-        rangeSlider2((div.style.width).replace("px",""));
-        document.getElementById("zin").value = div.style.zIndex;
+        loadProps(this);
     }
 
     function spawnDiv(type, num) {
@@ -72,7 +61,7 @@ board.ondrop = function(e) {
         i++;
         board.appendChild(div);
         dragElement(document.getElementById(div.id));
-        loadPropertiesByDiv(div);
+        loadProps(div);
     }
 
     function spawnTriangle(idnum) {
@@ -81,7 +70,7 @@ board.ondrop = function(e) {
         div.style.width = "0";
         div.style.borderLeft= "25px solid transparent";
         div.style.borderRight= "25px solid transparent";
-        div.style.borderBottom= "50px solid green";
+        div.style.borderBottom= "50px solid #00FF00";
         spawnDiv("triangle_", idnum);
     }
 
@@ -89,8 +78,9 @@ board.ondrop = function(e) {
         div = document.createElement('div');
         div.style.height= "50px";
         div.style.width= "50px";
-        div.style.background= "red";
+        div.style.background= "#ff0000";
         div.style.borderRadius= "50%";
+        div.style.border = "0px solid #000000";
         div.style.align= "center";
         spawnDiv("circle_", idnum);
     }
@@ -99,7 +89,8 @@ board.ondrop = function(e) {
         div = document.createElement('div');
         div.style.height= "50px";
         div.style.width= "50px";
-        div.style.background= "blue";
+        div.style.background= "#0000ff";
+        div.style.border = "0px solid #000000";
         div.style.align= "center";
 
         spawnDiv("square_", idnum);
@@ -123,7 +114,7 @@ window.MakeTriangle = () => {
     div.style.width = "0";
     div.style.borderLeft= "25px solid transparent";
     div.style.borderRight= "25px solid transparent";
-    div.style.borderBottom= "50px solid green";
+    div.style.borderBottom= "50px solid #00FF00";
     div.style.position = "absolute";
 
     div.id = "triangle_" + triangle_id_num;
@@ -137,7 +128,7 @@ window.MakeCircle = () => {
     var div = document.createElement('div');
     div.style.height= "50px";
     div.style.width= "50px";
-    div.style.background= "red";
+    div.style.background= "#ff0000";
     div.style.borderRadius= "50%";
     div.style.align= "center";
     div.style.position = "absolute";
@@ -152,7 +143,7 @@ window.MakeSquare = () => {
     var div = document.createElement('div');
     div.style.height= "50px";
     div.style.width= "50px";
-    div.style.background= "blue";
+    div.style.background= "#0000ff";
     div.style.align= "center";
     div.style.position = "absolute";
 
