@@ -1,4 +1,5 @@
-/node_modules
-/config/oauth.js
+/api/node_modules
 package-lock.json
 yarn.lock
+.idea/
+.DS_Store
