@@ -371,7 +371,7 @@
     width: 50px;
     background: #ff0000;
     border-Radius: 50%;
-    border-radius: 0px solid #000000;
+    border: 0px solid #000000;
     /*align: center;*/
     position: absolute;
   }
