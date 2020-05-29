@@ -42,22 +42,21 @@ class Figura {
                 this.div.style.borderBottom= "50px solid green";
                 this.div.style.borderBottom= "50px solid #00FF00";
                 break;
-            case "square":
+            case "circle":
                 this.div.style.height= "50px";
                 this.div.style.width= "50px";
-                this.div.style.background= "red";
                 this.div.style.background= "#ff0000";
                 this.div.style.borderRadius= "50%";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
                 break;
-            case "circle":
+            case "square":
                 this.div.style.height= "50px";
                 this.div.style.width= "50px";
-                this.div.style.background= "blue";
                 this.div.style.background= "#0000ff";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
+                this.div.style.borderRadius= "0%";
                 break;
             case "octagon":
 
@@ -68,7 +67,7 @@ class Figura {
         board.appendChild(this.div);
 
         this.div.addEventListener("click",loadProperties);
-        loadProperties(this.div);
+        loadProps(this.div);
     }
 
     getFigures() {
