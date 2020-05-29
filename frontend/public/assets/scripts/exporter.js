@@ -136,28 +136,36 @@ window.exportBoardToJson = (figures, save) => {
         figures.forEach(fig => {
             editors['css'] += getCSS(fig.div);
             let url = 'localhost:5000/api/figures';
-            console.log("processing fig: ", fig.id);
-            console.log("processing drawingID: ", drawingID);
             if (save) {
+                let newOrUpdateFigure = {
+                    drawingID: drawingID,
+                    text: 'drawingFigureTest',
+                    name: 'drawingFigureTest',
+                    figure_type: fig.type,
+                    animation: {
+                      time: null, //2s
+                      type: null, //fade
+                      property: null //height
+                    },
+                    cordinates: {
+                        x: fig.div.style.top,
+                        y: fig.div.style.left
+                    },
+                    div: fig.div.innerHTML,
+                };
                 if (fig.id) {
                     console.log('Figure exists needs to update')
+                    fetch('http://localhost:5000/api/figure/edit/' + fig.id, {
+                        method: 'put',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(newOrUpdateFigure)
+                    })
                 } else {
-                    let newDrawing = {
-                        drawingID: drawingID,
-                        text: 'drawingFigureTest',
-                        name: 'drawingFigureTest',
-                        figure_type: fig.type,
-                        cordinates: {
-                            x: fig.div.style.top,
-                            y: fig.div.style.left
-                        },
-                        div: fig.div.innerHTML,
-                    };
-                    console.log("saving newDrawing: ", JSON.stringify(newDrawing));
+                    console.log("saving newDrawing: ", JSON.stringify(newOrUpdateFigure));
                     fetch('http://localhost:5000/api/figure/', {
                         method: 'post',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(newDrawing)
+                        body: JSON.stringify(newOrUpdateFigure)
                     })
                     .then(response => response.json())
                     .then(data => console.log(data));
@@ -165,7 +173,7 @@ window.exportBoardToJson = (figures, save) => {
             }
         });
     }
-    console.log('exporting: editors', editors);
+
     return editors;
 };
 
