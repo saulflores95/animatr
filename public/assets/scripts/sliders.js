@@ -207,13 +207,14 @@ function loadProps(div) {
    setFigure(div.id);
    document.getElementById("zin").value = div.style.zIndex;
    loadPosition();
-   if (div.id.includes("triangle")) {
+   if (div.classList.contains("triangle")) {
+      console.log("octagon triangulo")
       var borderBottom = div.style.borderBottom.split(' ');
       heightSlider(borderBottom[0].replace("px", ""));
       var borderSides = parseInt(div.style.borderLeft.split(' ')[0].replace("px", "")) + parseInt(div.style.borderLeft.split(' ')[0].replace("px", ""));
       widthSlider(borderSides);
-   } else if (div.id.includes("octagon")) {
-
+   } else if (div.classList.contains("octagon")) {
+      console.log("octagon initalized")
    } else {
       borderStyleField.disabled = false;
       borderWidthField.setAttribute('readonly', false);
