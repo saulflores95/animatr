@@ -192,7 +192,11 @@ function setPosition() {
 }
 
 function loadProps(div) {
-   var borderArray = getBorderArray(div);
+   if(div != undefined) {
+      setFigure(div.id);
+   }
+
+   var borderArray = getBorderArray(currentFig);
 
    let borderStyleField = document.getElementById("borderStyle");
    let borderWidthField = document.getElementById("borderWidth");
@@ -204,22 +208,22 @@ function loadProps(div) {
    hexBorderColorField.setAttribute('disabled', true);
 
 
-   setFigure(div.id);
-   document.getElementById("zin").value = div.style.zIndex;
+   
+   document.getElementById("zin").value = currentFig.style.zIndex;
    loadPosition();
-   if (div.classList.contains("triangle")) {
-      var borderBottom = div.style.borderBottom.split(' ');
+   if (currentFig.classList.contains("triangle")) {
+      var borderBottom = currentFig.style.borderBottom.split(' ');
       heightSlider(borderBottom[0].replace("px", ""));
-      var borderSides = parseInt(div.style.borderLeft.split(' ')[0].replace("px", "")) + parseInt(div.style.borderLeft.split(' ')[0].replace("px", ""));
+      var borderSides = parseInt(currentFig.style.borderLeft.split(' ')[0].replace("px", "")) + parseInt(currentFig.style.borderLeft.split(' ')[0].replace("px", ""));
       widthSlider(borderSides);
-   } else if (div.classList.contains("octagon")) {
+   } else if (currentFig.classList.contains("octagon")) {
    } else {
       borderStyleField.disabled = false;
       borderWidthField.disabled = false;
       borderColorField.disabled = false;
       hexBorderColorField.disabled = false;
-      heightSlider((div.style.height).replace("px", ""));
-      widthSlider((div.style.width).replace("px", ""));
+      heightSlider((currentFig.style.height).replace("px", ""));
+      widthSlider((currentFig.style.width).replace("px", ""));
       loadBorder(borderArray);
       loadBGColor();
    }

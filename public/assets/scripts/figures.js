@@ -42,17 +42,15 @@ class Figura {
             case "square":
                 this.div.style.height= "50px";
                 this.div.style.width= "50px";
-                this.div.style.background= "red";
-                this.div.style.background= "#ff0000";
-                this.div.style.borderRadius= "50%";
+                this.div.style.background= "#0000ff";
                 this.div.style.border = "0px solid #000000";
-                this.div.style.align= "center";
+                this.div.style.align= "center";                
                 break;
             case "circle": 
                 this.div.style.height= "50px";
                 this.div.style.width= "50px";
-                this.div.style.background= "blue";
-                this.div.style.background= "#0000ff";
+                this.div.style.background= "#ff0000";
+                this.div.style.borderRadius= "50%";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
                 break;
@@ -63,7 +61,7 @@ class Figura {
 
         dragElement(this.div);
         board.appendChild(this.div);
-        
+        setFigure(this.div.id);
         this.div.addEventListener("click",loadProperties);
         loadProperties(this.div);
     }
