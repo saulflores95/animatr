@@ -57,6 +57,18 @@ router.post('/', (req, res) => {
 
   newFigure.save().then(figure => res.json(figure))
 });
+// @route  PUT api/figure/
+// @desc   edit figure
+// @access Public
+router.put('/edit/:id', (req, res) => {
+  console.log("req.body: ", req.body);
+  const { username, dateOfBirth, avatar, type  } = req.body;
+
+  Figure.update({'_id': req.params.id }, { username, dateOfBirth, avatar, type  }, (err) => console.log(err))
+});
+
+
+
 // @route  POST api/figures/like/:id
 // @desc   like figure
 // access  Private
@@ -135,7 +147,6 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (r
     })
     .catch(err => res.status(404).json({figurenotfound: 'No figure found'}))
 });
-
 // @route  Delete api/figures/comment/:id/:comment_id
 // @desc   Delete a comment from figure
 // access  Private

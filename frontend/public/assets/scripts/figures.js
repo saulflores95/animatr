@@ -10,7 +10,7 @@ var allFigures = [];
 let amount_of_figures = 0;
 
 class Figura {
-    constructor(type, x, y, animation) {
+    constructor(type, x, y, animation, id) {
       this.type = type;
       this.cordinates = {
           x,
@@ -21,18 +21,54 @@ class Figura {
           type: animation.type, //fade
           property: animation.property //height
       },
-      this.div;
+      this.id = id,
+      this.div
     }
 
     createForm() {
         this.div = document.createElement('div');
         this.div.className = this.type;
-        this.div.style.top =  this.cordinates.x;
+        this.div.style.zIndex = 0;
+        this.div.style.top = this.cordinates.x;
         this.div.style.left = this.cordinates.y;
-        dragElement(this.div);
-        board.appendChild(this.div);
         this.div.id = amount_of_figures.toString();
         amount_of_figures++;
+
+        switch(this.type) {
+            case "triangle":
+                this.div.style.width = "0";
+                this.div.style.borderLeft= "25px solid transparent";
+                this.div.style.borderRight= "25px solid transparent";
+                this.div.style.borderBottom= "50px solid green";
+                this.div.style.borderBottom= "50px solid #00FF00";
+                break;
+            case "square":
+                this.div.style.height= "50px";
+                this.div.style.width= "50px";
+                this.div.style.background= "red";
+                this.div.style.background= "#ff0000";
+                this.div.style.borderRadius= "50%";
+                this.div.style.border = "0px solid #000000";
+                this.div.style.align= "center";
+                break;
+            case "circle":
+                this.div.style.height= "50px";
+                this.div.style.width= "50px";
+                this.div.style.background= "blue";
+                this.div.style.background= "#0000ff";
+                this.div.style.border = "0px solid #000000";
+                this.div.style.align= "center";
+                break;
+            case "octagon":
+
+                break;
+        }
+
+        dragElement(this.div);
+        board.appendChild(this.div);
+
+        this.div.addEventListener("click",loadProperties);
+        loadProperties(this.div);
     }
 
     getFigures() {
@@ -41,7 +77,12 @@ class Figura {
 }
 
 function dragStart(e) {
+    console.log("e.target.id: ", e.target.id);
     e.dataTransfer.setData("text", e.target.id);
+}
+
+function loadProperties() {
+    loadProps(this);
 }
 
 board.ondrop = function(e) {
@@ -84,7 +125,6 @@ board.ondragover = function(e) {
 window.spawnFigure = (Fig_name) => {
     var fig = new Figura(Fig_name, 1, 3, {});
     fig.createForm();
-
     //dragElement(fig.div);
     //board.appendChild(fig.div);
 
@@ -100,10 +140,11 @@ window.loadHTTPFigures = (figures) => {
     if (figures) {
         figures.forEach(fig => {
             console.log("loadHTTPFigures fig: ", fig);                                   //animations still empty
-            let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, {});
+            let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, {}, fig._id);
             newFig.createForm();
             allFigures.push(newFig)
-        })
+        });
+        console.log("loadHTTPFigures allFigures: ", allFigures);
     }
 };
 

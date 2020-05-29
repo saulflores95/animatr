@@ -54,6 +54,7 @@ window.loadBoard = (htmlString) => {
     });
 
 };
+
 /**
  * Convert a template string into HTML DOM nodes
  * @param  {String} str The template string
@@ -135,35 +136,38 @@ window.exportBoardToJson = (figures, save) => {
         figures.forEach(fig => {
             editors['css'] += getCSS(fig.div);
             let url = 'localhost:5000/api/figures';
-            console.log("processing fig: ", fig);
+            console.log("processing fig: ", fig.id);
             console.log("processing drawingID: ", drawingID);
             if (save) {
-                let newDrawing = {
-                    drawingID: drawingID,
-                    text: 'drawingFigureTest',
-                    name: 'drawingFigureTest',
-                    figure_type: fig.type,
-                    cordinates: {
-                        x: fig.div.style.top,
-                        y: fig.div.style.left
-                    },
-                    div: fig.div.innerHTML,
-                };
-                console.log("saving newDrawing: ", JSON.stringify(newDrawing));
-                fetch('http://localhost:5000/api/figure/', {
-                    method: 'post',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(newDrawing)
-                })
-                .then(response => response.json())
-                .then(data => console.log(data));
+                if (fig.id) {
+                    console.log('Figure exists needs to update')
+                } else {
+                    let newDrawing = {
+                        drawingID: drawingID,
+                        text: 'drawingFigureTest',
+                        name: 'drawingFigureTest',
+                        figure_type: fig.type,
+                        cordinates: {
+                            x: fig.div.style.top,
+                            y: fig.div.style.left
+                        },
+                        div: fig.div.innerHTML,
+                    };
+                    console.log("saving newDrawing: ", JSON.stringify(newDrawing));
+                    fetch('http://localhost:5000/api/figure/', {
+                        method: 'post',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(newDrawing)
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+                }
             }
         });
     }
     console.log('exporting: editors', editors);
     return editors;
 };
-
 
 // let loadPreviouseSession = () => {
 //     if(localStorage.animatrSession) {
