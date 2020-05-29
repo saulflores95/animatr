@@ -7,6 +7,8 @@ var Circle = document.getElementById("CircleItem");
 var Square = document.getElementById("SquareItem");
 var Octagon = document.getElementById("OctagonItem");
 
+let amount_of_figures = 0;
+
 class Figura {
     constructor(type, x, y, animation) {
       this.type = type;
@@ -22,20 +24,59 @@ class Figura {
       this.div;
     }
 
-    createForm()
-    {
+    createForm() {
         this.div = document.createElement('div');
         this.div.className = this.type;
+        this.div.style.zIndex = 0;
+        this.div.id = amount_of_figures.toString();
+        amount_of_figures++;
+
+        switch(this.type) {
+            case "triangle": 
+                this.div.style.width = "0";
+                this.div.style.borderLeft= "25px solid transparent";
+                this.div.style.borderRight= "25px solid transparent";
+                this.div.style.borderBottom= "50px solid green";
+                this.div.style.borderBottom= "50px solid #00FF00";
+                break;
+            case "square":
+                this.div.style.height= "50px";
+                this.div.style.width= "50px";
+                this.div.style.background= "red";
+                this.div.style.background= "#ff0000";
+                this.div.style.borderRadius= "50%";
+                this.div.style.border = "0px solid #000000";
+                this.div.style.align= "center";
+                break;
+            case "circle": 
+                this.div.style.height= "50px";
+                this.div.style.width= "50px";
+                this.div.style.background= "blue";
+                this.div.style.background= "#0000ff";
+                this.div.style.border = "0px solid #000000";
+                this.div.style.align= "center";
+                break;
+            case "octagon": 
+                 
+                break;
+        }
 
         dragElement(this.div);
         board.appendChild(this.div);
+        
+        this.div.addEventListener("click",loadProperties);
+        loadProperties(this.div);
     }
 }
 
 function dragStart(e) {
+    console.log("e.target.id: ", e.target.id);
     e.dataTransfer.setData("text", e.target.id);
 }
 
+function loadProperties() { 
+    loadProps(this);
+}
 
 board.ondrop = function(e) {
     e.preventDefault();
@@ -45,13 +86,13 @@ board.ondrop = function(e) {
             spawnDiv("triangle");
             break;
         case "CircleItem":
-            spawnDiv("circle");    
+            spawnDiv("circle");
             break;
         case "SquareItem":
-            spawnDiv("square");    
+            spawnDiv("square");
             break;
         case "OctagonItem":
-            spawnDiv("octagon");    
+            spawnDiv("octagon");
             break
         default:
             break;
@@ -60,6 +101,7 @@ board.ondrop = function(e) {
     function spawnDiv(Fig_name) {
         var fig = new Figura(Fig_name, 1, 3, {});
         fig.createForm();
+        console.log("no entiendo");
 
         fig.div.style.position = "absolute";
         fig.div.style.top = (e.clientY - board.offsetTop - 25) + "px";
