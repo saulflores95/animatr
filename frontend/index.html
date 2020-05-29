@@ -281,11 +281,12 @@ function foo(items) {
    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.11.0/beautify-css.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.11.0/beautify-html.min.js"></script>
    <script>
+      // Generate this drawings ID
       let currentPath = window.location.href;
       let url = new URL(currentPath);
       let currentDrawingID = url.searchParams.get("drawingID");
-      console.log("currentDrawingID: ", currentDrawingID);
       let drawingID = new Date().getUTCMilliseconds();
+      // Load the infromation of that specific ID if it has some
       if (currentDrawingID) {
           console.log("currentDrawingID present loading figures...");
           drawingID = currentDrawingID;
@@ -304,9 +305,7 @@ function foo(items) {
           console.log("new_url:", new_url);
           window.location.href = new_url;
       }
-      console.log("currentDrawingID: ", currentDrawingID);
-      console.log("drawingID: ", drawingID);
-      console.log("currentPath: ", currentPath);
+
       var htmleditor = ace.edit("html-editor");
       htmleditor.setTheme("ace/theme/monokai");
       htmleditor.session.setMode("ace/mode/html");

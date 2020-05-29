@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
     .sort({ date: -1 })
     .then(figures => res.json(figures))
     .catch(err => res.status(404).json({nofiguresfound: 'No figures found'}))
-})
+});
 // @route  GET api/figures/:id
 // @desc   GET figures by id
 // access  Public
@@ -36,7 +36,6 @@ router.get('/:id', (req, res) => {
 // @desc   Creative figure
 // access  Private
 router.post('/', (req, res) => {
-  console.log("POSTPOSTPOST: ");
   const { errors, isValid } = validateFigureInput(req.body);
 
   if (!isValid) {
@@ -48,6 +47,11 @@ router.post('/', (req, res) => {
     name: req.body.name,
     drawingID: req.body.drawingID,
     figure_type: req.body.figure_type,
+    animation: {
+      time: null, //2s
+      type: null, //fade
+      property: null //height
+    },
     cordinates: {
         x: req.body.cordinates.x,
         y: req.body.cordinates.y
@@ -62,9 +66,9 @@ router.post('/', (req, res) => {
 // @access Public
 router.put('/edit/:id', (req, res) => {
   console.log("req.body: ", req.body);
-  const { username, dateOfBirth, avatar, type  } = req.body;
+  const { div, animation, cordinates  } = req.body;
 
-  Figure.update({'_id': req.params.id }, { username, dateOfBirth, avatar, type  }, (err) => console.log(err))
+  Figure.update({'_id': req.params.id }, { div, animation, cordinates  }, (err) => console.log(err))
 });
 
 
