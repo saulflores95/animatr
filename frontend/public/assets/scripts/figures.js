@@ -1,13 +1,19 @@
 import { dragElement } from './utils.js';
 
 var board = document.getElementById("board");
-
 var Triangle = document.getElementById("TriangleItem");
 var Circle = document.getElementById("CircleItem");
 var Square = document.getElementById("SquareItem");
 var Octagon = document.getElementById("OctagonItem");
 var allFigures = [];
 let amount_of_figures = 0;
+
+//fade animation keyframes
+var fade = {
+    opacity: "1",
+    opacity: "0",
+};
+
 
 class Figura {
     constructor(type, x, y, animation, id) {
@@ -42,21 +48,22 @@ class Figura {
                 this.div.style.borderBottom= "50px solid green";
                 this.div.style.borderBottom= "50px solid #00FF00";
                 break;
-            case "circle":
+            case "square":
                 this.div.style.height= "50px";
                 this.div.style.width= "50px";
+                this.div.style.background= "red";
                 this.div.style.background= "#ff0000";
                 this.div.style.borderRadius= "50%";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
                 break;
-            case "square":
+            case "circle":
                 this.div.style.height= "50px";
                 this.div.style.width= "50px";
+                this.div.style.background= "blue";
                 this.div.style.background= "#0000ff";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
-                this.div.style.borderRadius= "0%";
                 break;
             case "octagon":
 
@@ -66,8 +73,15 @@ class Figura {
         dragElement(this.div);
         board.appendChild(this.div);
 
+        this.div.animate(this.animation.type, {
+            duration: this.animation.time,
+            iterations: Infinity
+        });
+
+        console.log(this.div.getAnimations());
+        
         this.div.addEventListener("click",loadProperties);
-        loadProps(this.div);
+        loadProperties(this.div);
     }
 
     getFigures() {
@@ -105,7 +119,7 @@ board.ondrop = function(e) {
     }
 
     function spawnDiv(Fig_name) {
-        var fig = new Figura(Fig_name, 1, 3, {});
+        var fig = new Figura(Fig_name, 1, 3, {time: 2000, type: fade, property: undefined});
         fig.createForm();
 
         fig.div.style.position = "absolute";
@@ -122,7 +136,7 @@ board.ondragover = function(e) {
 }
 
 window.spawnFigure = (Fig_name) => {
-    var fig = new Figura(Fig_name, 1, 3, {});
+    var fig = new Figura(Fig_name, 1, 3, {time: 2000, type: fade, property: undefined});
     fig.createForm();
     //dragElement(fig.div);
     //board.appendChild(fig.div);
@@ -138,8 +152,11 @@ window.loadHTTPFigures = (figures) => {
     console.log("loadHTTPFigures figures: ", figures);
     if (figures) {
         figures.forEach(fig => {
-            console.log("loadHTTPFigures fig: ", fig);                                   //animations still empty
-            let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, {}, fig._id);
+            console.log("loadHTTPFigures fig: ", fig);                                   
+            //console.log(fig.animation);
+                                                                                            //animations still empty
+            //let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, {}, fig._id);
+            let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, fig.animation, fig._id);
             newFig.createForm();
             allFigures.push(newFig)
         });
