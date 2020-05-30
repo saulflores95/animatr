@@ -142,9 +142,13 @@ window.exportBoardToJson = (figures, save) => {
                     text: 'drawingFigureTest',
                     name: 'drawingFigureTest',
                     figure_type: fig.type,
+                    size: {
+                      width: fig.div.style.width,
+                      height: fig.div.style.height
+                    },
                     animation: {
                       time: null, //2s
-                      type: null, //fade
+                      type: fig.animation.type, //fade
                       property: null //height
                     },
                     cordinates: {

@@ -1,4 +1,5 @@
 var currentFig;
+var figObj;
 
 function setFigure(id) {
    if (id !== null) {
@@ -99,6 +100,21 @@ function zindexChange() {
       zinput = document.getElementById("zin");
       setStyleOn("z-index", zinput.value);
    } catch (error) {}
+}
+
+let animationLookup = [
+   'heart-beat ', 'spin-right'
+];
+
+function addAnimation() {
+   var animationToAdd = document.getElementById("animationSelector").value;
+   if (animationToAdd in currentFig.classList === true) {
+      currentFig.classList.remove(figObj.animation.type);
+   }
+   currentFig.classList.add(animationToAdd);
+   console.log("animationToAdd: ", animationToAdd);
+   console.log("currentFigure: ", currentFig);
+   figObj.animation.type = animationToAdd;
 }
 
 function borderColorChangeBox() {
@@ -211,7 +227,12 @@ function setPosition() {
    currentFig.style.top = document.getElementById("ypos").value;
 }
 
-function loadProps(div) {
+function loadProps(div, figureObject) {
+   console.log("loadProps:", div);
+   console.log("figureObject: ", figureObject);
+   if (figureObject) {
+       figObj = figureObject;
+   }
    if (div) {
       var borderArray = getBorderArray(div);
 
@@ -250,3 +271,4 @@ function loadProps(div) {
       }
    }
 }
+

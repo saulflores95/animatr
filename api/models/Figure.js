@@ -55,6 +55,16 @@ const FigureSchema = new Schema({
       type: String
     }
   },
+  size: {
+    width: {
+      type: String,
+      default:'25px'
+    },
+    height: {
+      type: String,
+      default:'25px'
+    }, //fade
+  }, //height
   animation: {
     time: {
       type: String,
