@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./public/assets/styles/main.css" />
+   <link rel="stylesheet" href="./public/assets/styles/animation.css" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"rel="stylesheet"/>
    <style type="text/css" media="screen">
       .editor { 
@@ -167,6 +168,7 @@ function foo(items) {
                         ></path>
                   </g>
                </svg>
+               <iframe width="560" height="315" src="https://www.youtube.com/embed/E2oh0EWKKFI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   </nav>
                <span class="link-text">AnimatR</span>
             </a>
          </li>
@@ -265,13 +267,19 @@ function foo(items) {
          <div class="zIndex parameter">
             <input type="number" id="zin" name="zin" class="pos" oninput="zindexChange()">
          </div>
+         <div class="title">Animation</div>
+         <div class="borderStyle parameter">
+            <select id="animationSelector" onchange="addAnimation()">
+               <option value="none">None</option>
+               <option value="spin-right">Rotate</option>
+               <option value="heart-beat">Heart Beat</option>
+               <option value="nudge">Nudge</option>
+            </select>
+         </div>
 
       </ul>
-      <button onclick="exportBoardToJson(getFigures(), true)">Export</button>
-      <button onclick="loadBoard()">Load</button>
-      <button onclick="clearBoard()">Clear</button>
-      <button onclick="getFigures()">getFigures</button>
-   </nav>
+         <button class="button" onclick="exportBoardToJson(getFigures(), true)">Save Current Drawing</button>
+         <button class="button" onclick="clearBoard()">Clear</button>
    <script type="module" src="./public/assets/scripts/utils.js"></script>
    <script type="module" src="./public/assets/scripts/figures.js"></script>
    <script type="module" src="./public/assets/scripts/exporter.js"></script>

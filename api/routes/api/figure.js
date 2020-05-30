@@ -47,9 +47,13 @@ router.post('/', (req, res) => {
     name: req.body.name,
     drawingID: req.body.drawingID,
     figure_type: req.body.figure_type,
+    size: {
+        width: req.body.size.width,
+        height: req.body.size.height
+    },
     animation: {
       time: null, //2s
-      type: null, //fade
+      type: req.body.animation.type, //fade
       property: null //height
     },
     cordinates: {
@@ -66,9 +70,9 @@ router.post('/', (req, res) => {
 // @access Public
 router.put('/edit/:id', (req, res) => {
   console.log("req.body: ", req.body);
-  const { div, animation, cordinates  } = req.body;
+  const { div, animation, cordinates, size  } = req.body;
 
-  Figure.update({'_id': req.params.id }, { div, animation, cordinates  }, (err) => console.log(err))
+  Figure.update({'_id': req.params.id }, { div, animation, cordinates, size  }, (err) => console.log(err))
 });
 
 

@@ -10,8 +10,12 @@ var allFigures = [];
 let amount_of_figures = 0;
 
 class Figura {
-    constructor(type, x, y, animation, id) {
+    constructor(type, x, y, animation, id, size) {
       this.type = type;
+      this.size = {
+          width: size ? size.width : null,
+          height: size ? size.height : null
+      },
       this.cordinates = {
           x,
           y,
@@ -32,34 +36,42 @@ class Figura {
         this.div.style.top = this.cordinates.x;
         this.div.style.left = this.cordinates.y;
         this.div.id = amount_of_figures.toString();
-        
+        if (this.size.width) {
+            this.div.style.width  = this.size.width;
+        } else {
+            this.div.style.width= "50px";
 
+        }
+        if (this.size.height) {
+            this.div.style.height  = this.size.height;
+         } else {
+            this.div.style.height= "50px";
+        }
+        if (this.animation.type) {
+            this.div.classList.add(this.animation.type);
+        }
         switch(this.type) {
             case "triangle":
-                this.div.style.width = "0";
+                if (!this.size.width) {
+                    this.div.style.width = "0";
+                }
                 this.div.style.borderLeft= "25px solid transparent";
                 this.div.style.borderRight= "25px solid transparent";
                 this.div.style.borderBottom= "50px solid #00FF00";
                 break;
             case "circle":
-                this.div.style.height= "50px";
-                this.div.style.width= "50px";
                 this.div.style.background= "#ff0000";
                 this.div.style.borderRadius= "50%";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
                 break;
             case "square":
-                this.div.style.height= "50px";
-                this.div.style.width= "50px";
                 this.div.style.background= "#0000ff";
                 this.div.style.border = "0px solid #000000";
                 this.div.style.align= "center";
                 this.div.style.borderRadius= "0%";
                 break;
             case "octagon":
-                this.div.style.height= "50px";
-                this.div.style.width= "50px";
                 let newDiv = document.createElement('div');
                 newDiv.style.background= "#ee8c25";
                 newDiv.className = "octagon-inner";
@@ -71,8 +83,8 @@ class Figura {
         dragElement(this.div);
         board.appendChild(this.div);
 
-        this.div.addEventListener("click",loadProperties);
-        loadProps(this.div);
+        this.div.addEventListener("click", loadProperties);
+        loadProps(this.div, this);
     }
 
     getFigures() {
@@ -86,7 +98,7 @@ function dragStart(e) {
 }
 
 function loadProperties() {
-    loadProps(this);
+    loadProps(this, allFigures[parseInt(this.id)]);
 }
 
 board.ondrop = function(e) {
@@ -144,7 +156,7 @@ window.loadHTTPFigures = (figures) => {
     if (figures) {
         figures.forEach(fig => {
             console.log("loadHTTPFigures fig: ", fig);                                   //animations still empty
-            let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, {}, fig._id);
+            let newFig = new Figura(fig.figure_type, fig.cordinates.x, fig.cordinates.y, fig.animation, fig._id, fig.size);
             newFig.createForm();
             allFigures.push(newFig)
         });
