@@ -32,14 +32,13 @@ class Figura {
         this.div.style.top = this.cordinates.x;
         this.div.style.left = this.cordinates.y;
         this.div.id = amount_of_figures.toString();
-        amount_of_figures++;
+        
 
         switch(this.type) {
             case "triangle":
                 this.div.style.width = "0";
                 this.div.style.borderLeft= "25px solid transparent";
                 this.div.style.borderRight= "25px solid transparent";
-                this.div.style.borderBottom= "50px solid green";
                 this.div.style.borderBottom= "50px solid #00FF00";
                 break;
             case "circle":
@@ -59,10 +58,16 @@ class Figura {
                 this.div.style.borderRadius= "0%";
                 break;
             case "octagon":
-
+                this.div.style.height= "50px";
+                this.div.style.width= "50px";
+                let newDiv = document.createElement('div');
+                newDiv.style.background= "#ee8c25";
+                newDiv.className = "octagon-inner";
+                newDiv.id = amount_of_figures.toString() + "_Octa";
+                this.div.appendChild(newDiv);
                 break;
         }
-
+        amount_of_figures++;
         dragElement(this.div);
         board.appendChild(this.div);
 
